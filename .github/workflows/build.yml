@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-and-push:
+    name: Build and push tag `${{ github.event.inputs.base_tag }}`
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository

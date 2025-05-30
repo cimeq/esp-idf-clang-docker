@@ -2,5 +2,5 @@
 ARG BASE_IMAGE
 FROM ${BASE_IMAGE}
 
-RUN idf_tools.py install esp-clang && \
-    idf_tools.py install-python-env
+RUN $IDF_PATH/tools/idf_tools.py install esp-clang && \
+    $IDF_PATH/tools/idf_tools.py install-python-env
