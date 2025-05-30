@@ -1,0 +1,31 @@
+name: Build and push derived esp-idf image
+
+on:
+  workflow_dispatch:
+    inputs:
+      base_tag:
+        description: "Tag of espressif/idf to use (e.g., 5.4.1)"
+        required: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Build image
+        run: |
+          docker build \
+            --build-arg BASE_IMAGE=espressif/idf:${{ github.event.inputs.base_tag }} \
+            -t ${{ github.repository_owner }}/esp-idf-clang:${{ github.event.inputs.base_tag }} .
+
+      - name: Push image
+        run: |
+          docker push ${{ github.repository_owner }}/esp-idf-clang:${{ github.event.inputs.base_tag }}
