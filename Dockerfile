@@ -1,5 +1,5 @@
 # Base image will be set dynamically in the GitHub workflow
-ARG BASE_IMAGE
+ARG BASE_IMAGE=latest
 FROM ${BASE_IMAGE}
 
 RUN $IDF_PATH/tools/idf_tools.py install esp-clang && \
