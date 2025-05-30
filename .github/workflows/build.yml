@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       base_tag:
-        description: "Tag of espressif/idf to use (e.g., 5.4.1)"
+        description: "Tag of espressif/idf to use (e.g., v5.4.1)"
         required: true
 
 jobs:
