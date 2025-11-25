@@ -9,8 +9,14 @@ RUN $IDF_PATH/tools/idf_tools.py install esp-clang && \
 
 RUN apt update -y && apt upgrade -y && apt install gcovr clang-tidy-19 cmake -y
 RUN apt install g++-14 gcc-14 -y 
+
+# Install alternatives for G++
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
+
+# Install alternatives for Gcc
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 14
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
 
 #RUN useradd -m -s /bin/bash cicd
 RUN groupadd -g 111 cicd && \
