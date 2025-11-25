@@ -7,7 +7,10 @@ LABEL org.opencontainers.image.source=https://github.com/lptr/esp-idf-clang-dock
 RUN $IDF_PATH/tools/idf_tools.py install esp-clang && \
     $IDF_PATH/tools/idf_tools.py install-python-env
 
-RUN apt update && apt install gcovr clang-tidy-19 cmake -y
+RUN apt update -y && apt upgrade -y && apt install gcovr clang-tidy-19 cmake -y
+RUN apt install g++-14 gcc-14 -y 
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
 
 #RUN useradd -m -s /bin/bash cicd
 RUN groupadd -g 111 cicd && \
